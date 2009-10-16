@@ -1,0 +1,39 @@
+/* 
+  OpenGalaxies - A Star Wars Galaxies PreCU Server Emulator
+ 
+  Copyright (c) 2009 OpenGalaxies <http://www.opengalaxies.org>
+ 
+  This program is free software; you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation; either version 2 of the License, or
+  (at your option) any later version.
+ 
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  GNU General Public License for more details.
+ 
+  You should have received a copy of the GNU General Public License
+  along with this program; if not, see <http://www.gnu.org/licenses/>.
+*/
+
+#ifndef CONFIG_H
+#define CONFIG_H
+
+//
+// Version
+//
+#define OG_VERSION "${OG_VERSION}"
+#define OG_VERSION_MAJOR ${OG_VERSION_MAJOR}
+#define OG_VERSION_MINOR ${OG_VERSION_MINOR}
+#define OG_VERSION_BUILD ${OG_VERSION_BUILD}
+#define OG_VERSION_STAGE "${OG_VERSION_STAGE}"
+#define OG_VERSION_EXTRA "${OG_VERSION_EXTRA}"
+
+//
+// Endianness
+//
+#define OG_BIG_ENDIAN ${OG_BIG_ENDIAN}
+#define OG_LITTLE_ENDIAN ${OG_LITTLE_ENDIAN}
+#define OG_ENDIANNESS ${OG_ENDIANNESS}
+
+#endif
