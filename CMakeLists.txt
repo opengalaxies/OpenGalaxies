@@ -40,13 +40,14 @@ SET( CMAKE_MODULE_PATH
 )
 
 # Configuration
+INCLUDE( CheckPlatform )
 INCLUDE( CheckEndianness )
 
 # Find packages
 FIND_PACKAGE( Boost REQUIRED )
 FIND_PACKAGE( Qt4 4.5.0 )
 
-CONFIGURE_FILE( ${CMAKE_SOURCE_DIR}/config.h.in ${CMAKE_SOURCE_DIR}/src/shared/config.h )
+CONFIGURE_FILE( ${CMAKE_SOURCE_DIR}/config.h.in ${CMAKE_SOURCE_DIR}/src/framework/util/config.h )
 
 # Include Subdirectories for Compiling
 ADD_SUBDIRECTORY( src )

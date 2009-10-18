@@ -14,21 +14,17 @@
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, see <http://www.gnu.org/licenses/>.
 
-# This file is responsible for checking the endianness of the
-# machine and correctly configure the project to build appropriatly.
+# This file is responsible to do platform checks. And adding the
+# definitions for configuration.
 
-SET( OG_BIG_ENDIAN 1 )
-SET( OG_LITTLE_ENDIAN 2 )
-SET( OG_ENDIANNESS 0 ) # default
+SET( OG_PLATFORM_WIN32 1 )
+SET( OG_PLATFORM_UNIX 2 )
+SET( OG_PLATFORM_APPLE 3 )
 
-include( TestBigEndian )
-
-TEST_BIG_ENDIAN( ENDIAN )
-
-if( ${ENDIAN} EQUAL 1 ) # Big Endian
-	MESSAGE( "Endianness: Big-Endian" )
-	SET( OG_ENDIANNESS OG_BIG_ENDIAN )
-else ( ${ENDIAN} EQUAL 1 ) # Little Endian
-	MESSAGE( "Endianness: Little-Endian" )
-	SET( OG_ENDIANNESS OG_LITTLE_ENDIAN )
-endif( ${ENDIAN} EQUAL 1 )
+IF( WIN32 )
+	SET( OG_PLATFORM OG_PLATFORM_WIN32 )
+ELSEIF( UNIX )
+	SET( OG_PLATFORM OG_PLATFORM_UNIX )
+ELSE( WIN32 )
+	MESSAGE( "Platform not supported. Only NT and Unit based Operating Systems are supported." )
+ENDIF( WIN32 )
