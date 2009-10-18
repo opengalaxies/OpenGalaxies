@@ -26,7 +26,7 @@ SET( OG_VERSION_STAGE "Pre-Alpha" )
 SET( OG_VERSION_EXTRA "" )
 SET( OG_VERSION "${OG_VERSION_MAJOR}.${OG_VERSION_MINOR}.${OG_VERSION_BUILD}" )
 
-# Output
+# Install
 SET( CMAKE_INSTALL_PREFIX ./ CACHE PATH "Install Path" )
 SET( LIB_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/lib" CACHE PATH "The directory reletive to the install directory where all libraries will be dumped." )
 
@@ -39,15 +39,26 @@ SET( CMAKE_MODULE_PATH
 	${CMAKE_SOURCE_DIR}/build/cmake/modules
 )
 
-# Configuration
-INCLUDE( CheckPlatform )
-INCLUDE( CheckEndianness )
-
 # Find packages
 FIND_PACKAGE( Boost REQUIRED )
 FIND_PACKAGE( Qt4 4.5.0 )
 
-CONFIGURE_FILE( ${CMAKE_SOURCE_DIR}/config.h.in ${CMAKE_SOURCE_DIR}/src/framework/util/config.h )
+# Configuration
+INCLUDE( CheckPlatform )
+INCLUDE( CheckEndianness )
+INCLUDE( CheckInOutBuildSource )
+INCLUDe( DefineTargetSuffixes )
+
+CONFIGURE_FILE( ${CMAKE_SOURCE_DIR}/config.h.in ${CMAKE_CURRENT_BINARY_DIR}/config.h )
+
+# Set default output directories. These can be overwritten in lower CMakeLists.txts if needed.
+SET( LIBRARY_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/lib )
+SET( ARCHIVE_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/lib )
+SET( RUNTIME_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/bin )
+
+# Add some default include directories
+INCLUDE_DIRECTORIES( src )
+INCLUDE_DIRECTORIES( include )
 
 # Include Subdirectories for Compiling
 ADD_SUBDIRECTORY( src )
