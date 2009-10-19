@@ -49,16 +49,25 @@ INCLUDE( CheckEndianness )
 INCLUDE( CheckInOutBuildSource )
 INCLUDe( DefineTargetSuffixes )
 
-CONFIGURE_FILE( ${CMAKE_SOURCE_DIR}/config.h.in ${CMAKE_CURRENT_BINARY_DIR}/config.h )
+CONFIGURE_FILE( ${CMAKE_SOURCE_DIR}/config.h.in ${CMAKE_CURRENT_BINARY_DIR}/include/config.h )
 
 # Set default output directories. These can be overwritten in lower CMakeLists.txts if needed.
 SET( LIBRARY_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/lib )
+SET( LIBRARY_OUTPUT_DIRECTORY "./" )
 SET( ARCHIVE_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/lib )
+SET( ARCHIVE_OUTPUT_DIRECTORY "./" )
 SET( RUNTIME_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/bin )
 
 # Add some default include directories
-INCLUDE_DIRECTORIES( src )
-INCLUDE_DIRECTORIES( include )
+#
+# src - This is where private headers reside.
+#
+# include - This is where public headers reside. These are used for the development
+# of third-party plugins, services and tools. (API)
+#
+# ${CMAKE_CURRENT_BINARY_DIR}/include - This is where config.h resides, so each
+# build can have different configurations
+INCLUDE_DIRECTORIES( src include ${CMAKE_CURRENT_BINARY_DIR}/include )
 
 # Include Subdirectories for Compiling
 ADD_SUBDIRECTORY( src )

@@ -14,4 +14,13 @@
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, see <http://www.gnu.org/licenses/>.
 
-ADD_SUBDIRECTORY( framework )
+CMAKE_MINIMUM_REQUIRED( VERSION 2.6 )
+
+PROJECT( Framework )
+
+# Gather sources and headers.
+FILE( GLOB_RECURSE SOURCES *.cc )
+FILE( GLOB_RECURSE HEADERS *.h )
+
+ADD_LIBRARY( framework STATIC ${SOURCES} ${HEADERS} )
+SET_TARGET_PROPERTIES( framework PROPERTIES LINKER_LANGUAGE CXX )
