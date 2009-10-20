@@ -70,7 +70,6 @@ SET( RUNTIME_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/bin )
 INCLUDE_DIRECTORIES( src include ${CMAKE_CURRENT_BINARY_DIR}/include )
 
 # Include Subdirectories for Compiling
-ADD_SUBDIRECTORY( src )
 
 IF( BUILD_TESTS )
 	ENABLE_TESTING()
