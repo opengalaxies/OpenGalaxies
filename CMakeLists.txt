@@ -49,7 +49,7 @@ INCLUDE( CheckEndianness )
 INCLUDE( CheckInOutBuildSource )
 INCLUDe( DefineTargetSuffixes )
 
-CONFIGURE_FILE( ${CMAKE_SOURCE_DIR}/config.h.in ${CMAKE_CURRENT_BINARY_DIR}/include/config.h )
+CONFIGURE_FILE( ${CMAKE_SOURCE_DIR}/config.h.in ${CMAKE_BINARY_DIR}/include/config.h )
 
 # Set default output directories. These can be overwritten in lower CMakeLists.txts if needed.
 SET( LIBRARY_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/lib )
@@ -67,9 +67,9 @@ SET( RUNTIME_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/bin )
 #
 # ${CMAKE_CURRENT_BINARY_DIR}/include - This is where config.h resides, so each
 # build can have different configurations
-INCLUDE_DIRECTORIES( src include ${CMAKE_CURRENT_BINARY_DIR}/include )
+INCLUDE_DIRECTORIES( include ${CMAKE_BINARY_DIR}/include ${Boost_INCLUDE_DIRS} )
 
-# Include Subdirectories for Compiling
+ADD_SUBDIRECTORY( src )
 
 IF( BUILD_TESTS )
 	ENABLE_TESTING()

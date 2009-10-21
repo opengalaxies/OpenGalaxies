@@ -17,14 +17,30 @@
 */
 
 #ifndef OGDEF_H
-#define OGDEF_h
+#define OGDEF_H
 
 #include <config.h>
 
+//
+// Safe Deletes
+//
 #define SAFE_DELETE( a ) \
 	if(a) { delete a; a = 0; }
 
 #define SAFE_RELEASE( a ) \
 	if(a) { a->Release(); a = 0; }
+
+//
+// API
+//
+#if ( OG_PLATFORM == OG_PLATFORM_WIN32 )
+#	ifdef OG_EXPORT
+#		define OG_API __declspec(dllexport)
+#	else
+#		define OG_API __declspec(dllimport)
+#	endif
+#else
+#	define OG_API 
+#endif
 
 #endif
