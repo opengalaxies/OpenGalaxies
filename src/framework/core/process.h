@@ -58,6 +58,7 @@
  *
  *
  * @note This class was based off of the CProcess class from "Game Coding Complete: Third Edition" by Mike McShaffry.
+ * @see ProcessManager
  */
 class OG_API Process : public boost::noncopyable
 {
@@ -67,10 +68,10 @@ public:
 
 	// OPERATIONS
 	//
-	virtual void Initialize( void ) = 0;
-	virtual void Kill( void ) { mKill = true; }
-	virtual void TogglePause( void ) { mIsPaused = !mIsPaused; }
-	virtual void Update( const uint32 deltaMilliseconds ) = 0;
+	virtual void Initialize( void )								{ mIsInitialized = true; }
+	virtual void Kill( void )									{ mKill = true; }
+	virtual void TogglePause( void )							{ mIsPaused = !mIsPaused; }
+	virtual void Update( const uint32 deltaMilliseconds )		{ if(!IsInitialized()) { Initialize(); } }
 
 	// INQUIRIES
 	//
@@ -81,8 +82,9 @@ public:
 
 	// ACCESS
 	//
-	boost::shared_ptr<Process> GetNext( void ) const { return mNextProcess; }
-	boost::shared_ptr<Process> SetNext( boost::shared_ptr<Process> nextProcess ) { mNextProcess = nextProcess; return mNextProcess; }
+	boost::shared_ptr<Process> GetNext( void ) const								{ return mNextProcess; }
+	boost::shared_ptr<Process> SetNext( boost::shared_ptr<Process> nextProcess )	{ mNextProcess = nextProcess; return mNextProcess; }
+	void SetAttached( bool value )													{ mIsAttached = value; }
 
 protected:
 

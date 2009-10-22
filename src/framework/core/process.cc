@@ -21,7 +21,7 @@
 #include "process.h"
 
 Process::Process()
-: mKill( false )
+: mKill( false ), mIsAttached( false ), mIsInitialized( false ), mIsPaused( false )
 {
 }
 
