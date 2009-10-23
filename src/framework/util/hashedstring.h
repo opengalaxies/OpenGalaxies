@@ -16,57 +16,55 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef PROCESSMANAGER_H
-#define PROCESSMANAGER_H
-
-// BOOST INCLUDES
-//
-#include <boost/shared_ptr.hpp>
+#ifndef HASHEDSTRING_H
+#define HASHEDSTRING_H
 
 // PROJECT INCLUDES
 //
-#include <framework/core/process.h>
 #include <framework/util/ogdef.h>
 #include <framework/util/ogtypes.h>
 
 // STL INCLUDES
 //
-#include <list>
+#include <string>
 
 /**
-* @classname ProcessManager
-* @brief A container and manager for Processes.
+* @classname HashedString
+* @brief A string hashing container.
 *
-* Holds and maintains the updating of Processes. Once a process is considered to be dead, the ProcessManager
-* will clean it up accordingly.
+* String hasing envolves taking a ASCII string, performing calculations on it,
+* which outputs an integer "hash" or "crc" value of that string.
 *
-* @note This class was based off of the CProcessManager class from "Game Coding Complete: Third Edition" by Mike McShaffry.
-* @see Process
+* Using hashed strings instead of normal string for string comparing, you can in most cases
+* cause better performance within a program. Because you are not having to compare each character
+* in the string.
 */
-class OG_API ProcessManager
+class OG_API HashedString
 {
-	typedef std::list< boost::shared_ptr<Process> > ProcessList;
 public:
-	ProcessManager( void );
-	virtual ~ProcessManager( void );
+	HashedString( std::string input );
+	virtual ~HashedString();
 
 	// OPERATIONS
 	//
-	void Attach( boost::shared_ptr<Process> pProcess );
-	void Update( int deltaMilliseconds );
+	virtual void* HashString( std::string input );
 
-	// INQUIRES
+	// OPERATORS
 	//
-	bool HasProcesses()	{ return mProcesses.empty(); }
+	bool operator == ( HashedString& other );
+	bool operator < (HashedString& other );
+
+	// ACCESS
+	//
+	CRC GetIdent() const			{ return reinterpret_cast<CRC>(mIdent); }
 
 protected:
-	ProcessList		mProcesses;
 
 private:
-
-	// OPERATIONS
-	//
-	void Detach( boost::shared_ptr<Process> pProcess );
+	std::string		mString;
+	void*			mIdent; // Stored as a void* instead of a uint32, so
+							// the value will show up in the debugger as
+							// a hex-value.
 
 };
 

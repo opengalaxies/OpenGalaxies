@@ -16,22 +16,39 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef OGTYPES_H
-#define OGTYPES_H
+#include "crctable.h"
+#include "hashedstring.h"
 
-//
-// Common Redefinitions
-//
-typedef	char					int8;
-typedef short					int16;
-typedef int						int32;
-typedef long long				int64;
-typedef unsigned char			uint8;
-typedef unsigned short			uint16;
-typedef unsigned int			uint32;
-typedef unsigned long long		uint64;
+HashedString::HashedString( std::string input )
+: mString( input ), mIdent( HashString( input ) )
+{
+}
 
-typedef uint64					OBJECT_HANDLE;
-typedef unsigned long			CRC;
+HashedString::~HashedString( void )
+{
+}
 
-#endif
+void*
+HashedString::HashString( std::string input )
+{
+	uint32 length = input.length();
+	CRC crc = 0xFFFFFFFF;
+
+	for(uint16 counter = 0; counter < length; counter++)
+		crc = CrcTable[input[counter] ^ (crc >> 24)] ^ (crc << 8);
+
+	return reinterpret_cast<void*>(~crc);
+}
+
+bool
+HashedString::operator ==( HashedString &other )
+{
+	return ( GetIdent() == other.GetIdent() );
+}
+
+bool
+HashedString::operator <( HashedString &other )
+{
+	return ( GetIdent() < other.GetIdent() );
+}
+

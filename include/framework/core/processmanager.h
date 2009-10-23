@@ -16,22 +16,4 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef OGTYPES_H
-#define OGTYPES_H
-
-//
-// Common Redefinitions
-//
-typedef	char					int8;
-typedef short					int16;
-typedef int						int32;
-typedef long long				int64;
-typedef unsigned char			uint8;
-typedef unsigned short			uint16;
-typedef unsigned int			uint32;
-typedef unsigned long long		uint64;
-
-typedef uint64					OBJECT_HANDLE;
-typedef unsigned long			CRC;
-
-#endif
+#include "../../../src/framework/core/processmanager.h"
