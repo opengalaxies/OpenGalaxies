@@ -32,12 +32,12 @@
 * @classname HashedString
 * @brief A string hashing container.
 *
-* String hasing envolves taking a ASCII string, performing calculations on it,
-* which outputs an integer "hash" or "crc" value of that string.
+* String hashing envolves taking a ASCII string and performing calculations on it,
+* which outputs an integer "hash" or "crc" value.
 *
-* Using hashed strings instead of normal string for string comparing, you can in most cases
-* cause better performance within a program. Because you are not having to compare each character
-* in the string.
+* Using hashed strings for string comparing can in most cases boost performance within a program, because
+* there is no character-by-character comparing, but rather one calculation which compares each integer with
+* eachother.
 */
 class OG_API HashedString
 {
@@ -56,13 +56,13 @@ public:
 
 	// ACCESS
 	//
-	CRC GetIdent() const			{ return reinterpret_cast<CRC>(mIdent); }
+	unsigned long GetHashValue() const			{ return reinterpret_cast<unsigned long>(mHashValue); }
 
 protected:
 
 private:
 	std::string		mString;
-	void*			mIdent; // Stored as a void* instead of a uint32, so
+	void*			mHashValue; // Stored as a void* instead of a uint32, so
 							// the value will show up in the debugger as
 							// a hex-value.
 

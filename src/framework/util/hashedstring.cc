@@ -20,7 +20,7 @@
 #include "hashedstring.h"
 
 HashedString::HashedString( std::string input )
-: mString( input ), mIdent( HashString( input ) )
+: mString( input ), mHashValue( HashString( input ) )
 {
 }
 
@@ -43,12 +43,12 @@ HashedString::HashString( std::string input )
 bool
 HashedString::operator ==( HashedString &other )
 {
-	return ( GetIdent() == other.GetIdent() );
+	return ( GetHashValue() == other.GetHashValue() );
 }
 
 bool
 HashedString::operator <( HashedString &other )
 {
-	return ( GetIdent() < other.GetIdent() );
+	return ( GetHashValue() < other.GetHashValue() );
 }
 
