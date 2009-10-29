@@ -42,6 +42,7 @@
 class OG_API HashedString
 {
 public:
+	HashedString( void );
 	HashedString( std::string input );
 	virtual ~HashedString();
 

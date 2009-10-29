@@ -16,44 +16,37 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "crctable.h"
-#include "hashedstring.h"
+#ifndef TESTEVENTMANAGER_H
+#define TESTEVENTMANAGER_H
 
-HashedString::HashedString( )
-: mString( "NULL" ), mHashValue( 0 )
+// CPPUNIT INCLUDES
+//
+#include <cppunit/extensions/HelperMacros.h>
+
+// PROJECT INCLUDES
+//
+#include <framework/core/eventmanager.h>
+
+class TestEventManager : public CppUnit::TestFixture
 {
-}
+	CPPUNIT_TEST_SUITE( TestEventManager );
+	CPPUNIT_TEST( testQueue );
+	CPPUNIT_TEST( testTrigger );
+	CPPUNIT_TEST_SUITE_END( TestEventManager );
+public:
+	TestEventManager( void ) : mEventManager( "TestEventManager" ) { }
+	~TestEventManager( void ) { }
 
-HashedString::HashedString( std::string input )
-: mString( input ), mHashValue( HashString( input ) )
-{
-}
+	void setUp( void );
+	void tearDown( void );
 
-HashedString::~HashedString( void )
-{
-}
+	void testQueue( void );
+	void testTrigger( void );
+protected:
+private:
+	void HandleEvent( const EventPtr& pEvent );
 
-void*
-HashedString::HashString( const std::string input )
-{
-	uint32 length = input.length();
-	CRC crc = 0xFFFFFFFF;
+	EventManager mEventManager;
+};
 
-	for(uint16 counter = 0; counter < length; counter++)
-		crc = CrcTable[input[counter] ^ (crc >> 24)] ^ (crc << 8);
-
-	return reinterpret_cast<void*>(~crc);
-}
-
-bool
-HashedString::operator ==( const HashedString &other )
-{
-	return ( GetHashValue() == other.GetHashValue() );
-}
-
-bool
-HashedString::operator <( const HashedString &other )
-{
-	return ( GetHashValue() < other.GetHashValue() );
-}
-
+#endif

@@ -16,44 +16,4 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "crctable.h"
-#include "hashedstring.h"
-
-HashedString::HashedString( )
-: mString( "NULL" ), mHashValue( 0 )
-{
-}
-
-HashedString::HashedString( std::string input )
-: mString( input ), mHashValue( HashString( input ) )
-{
-}
-
-HashedString::~HashedString( void )
-{
-}
-
-void*
-HashedString::HashString( const std::string input )
-{
-	uint32 length = input.length();
-	CRC crc = 0xFFFFFFFF;
-
-	for(uint16 counter = 0; counter < length; counter++)
-		crc = CrcTable[input[counter] ^ (crc >> 24)] ^ (crc << 8);
-
-	return reinterpret_cast<void*>(~crc);
-}
-
-bool
-HashedString::operator ==( const HashedString &other )
-{
-	return ( GetHashValue() == other.GetHashValue() );
-}
-
-bool
-HashedString::operator <( const HashedString &other )
-{
-	return ( GetHashValue() < other.GetHashValue() );
-}
-
+#include "../../../src/framework/core/ieventdata.h"
