@@ -47,16 +47,17 @@ public:
 
 	// OPERATIONS
 	//
-	virtual void* HashString( std::string input );
+	virtual void* HashString( const std::string input );
 
 	// OPERATORS
 	//
-	bool operator == ( HashedString& other );
-	bool operator < (HashedString& other );
+	bool operator == ( const HashedString& other );
+	bool operator < ( const HashedString& other );
 
 	// ACCESS
 	//
 	unsigned long GetHashValue() const			{ return reinterpret_cast<unsigned long>(mHashValue); }
+	std::string GetString() const				{ return mString; }
 
 protected:
 

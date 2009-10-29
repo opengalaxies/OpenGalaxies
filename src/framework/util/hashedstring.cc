@@ -29,7 +29,7 @@ HashedString::~HashedString( void )
 }
 
 void*
-HashedString::HashString( std::string input )
+HashedString::HashString( const std::string input )
 {
 	uint32 length = input.length();
 	CRC crc = 0xFFFFFFFF;
@@ -41,13 +41,13 @@ HashedString::HashString( std::string input )
 }
 
 bool
-HashedString::operator ==( HashedString &other )
+HashedString::operator ==( const HashedString &other )
 {
 	return ( GetHashValue() == other.GetHashValue() );
 }
 
 bool
-HashedString::operator <( HashedString &other )
+HashedString::operator <( const HashedString &other )
 {
 	return ( GetHashValue() < other.GetHashValue() );
 }

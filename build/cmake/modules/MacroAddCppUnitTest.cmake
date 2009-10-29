@@ -14,27 +14,15 @@
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, see <http://www.gnu.org/licenses/>.
 
-# This file is responsible to do platform checks. And adding the
-# definitions for configuration.
+# 
+# Adds a CppUnit test to the project.
+#
 
-SET( OG_PLATFORM_WIN32 1 )
-SET( OG_PLATFORM_LUNIX 2 )
-SET( OG_PLATFORM_APPLE 3 )
-SET( OG_PLATFORM_FREEBSD 4 )
-
-IF( WIN32 )
-	SET( OG_PLATFORM OG_PLATFORM_WIN32 )
-ELSEIF( UNIX )
-	EXEC_PROGRAM( uname OUTPUT_VARIABLE SYSTEM_NAME )
+MACRO( add_cppunit_test test_NAME )
+	FILE( GLOB TEST_SOURCES ${test_NAME}/*.cc )
+	FILE( GLOB TEST_HEADERS ${test_NAME}/*.h )
 	
-	IF( SYSTEM_NAME STREQUAL "Linux" )
-		SET( OG_PLATFORM OG_PLATFORM_LINUX )
-	ENDIF( SYSTEM_NAME STREQUAL "Linux" )
-	
-	IF( SYSTEM_NAME STREQUAL "FreeBSD" )
-		SET( OG_PLATFORM OG_PLATFORM_FREEBSD )
-	ENDIF( SYSTEM_NAME STREQUAL "FreeBSD" )
-	
-ELSE( WIN32 )
-	MESSAGE( "Platform not supported. Only NT and Unit based Operating Systems are supported." )
-ENDIF( WIN32 )
+	ADD_EXECUTABLE( ${test_NAME} ${TEST_SOURCES} ${TEST_HEADERS} )
+	TARGET_LINK_LIBRARIES( ${test_NAME} ${ARGN} cppunitd )
+	ADD_TEST( ${test_NAME} ${CMAKE_BINARY_DIR}/bin/${test_NAME} )
+ENDMACRO( add_cppunit_test test_NAME )

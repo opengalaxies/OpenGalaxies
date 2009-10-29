@@ -24,3 +24,5 @@ FILE( GLOB HEADERS *.h )
 ADD_LIBRARY( ogcore SHARED ${SOURCES} ${HEADERS} )
 SET_TARGET_PROPERTIES( ogcore PROPERTIES LINKER_LANGUAGE CXX ) # Set our linking language as C++
 
+TARGET_LINK_LIBRARIES( ogcore ogutil )
+
