@@ -45,23 +45,36 @@ ProcessManager::Detach(boost::shared_ptr<Process> pProcess)
 void
 ProcessManager::Update(int deltaMilliseconds)
 {
-	for(ProcessList::iterator i = mProcesses.begin(); i != mProcesses.end(); i++)
+	if( mProcesses.size() <= 0)
+		return;
+
+	/* HACK
+	 * As you may have noticed, we need to manually increment the iterator or else it will become
+	 * invalid if a process is declared dead.
+	 *
+	 * There should be serveral standard ways of getting round this while retaining the normal iterator
+	 * increment statement in the for statement.
+	 */
+	for(ProcessList::iterator i = mProcesses.begin(); i != mProcesses.end(); )
 	{
 		boost::shared_ptr< Process > pProcess(*i);
 
 		if( pProcess->IsDead() ) // Our process is dead-- get rid of it.
 		{
-			if( pProcess->GetNext() ) // We have a child process, attach it to the manager.
+			boost::shared_ptr< Process > pNext( pProcess->GetNext() );
+			if( pNext ) // We have a child process, attach it to the manager.
 			{
-				Attach( pProcess->GetNext() );
 				pProcess->SetNext( boost::shared_ptr< Process >((Process*) NULL)); // Nullify our next for the dead process.
+				Attach( pNext );
 			}
 
+			i++;
 			Detach( pProcess );
 		}
 		else if( !pProcess->IsPaused() )
 		{
 			pProcess->Update( deltaMilliseconds );
+			i++;
 		}
 	}
 }
