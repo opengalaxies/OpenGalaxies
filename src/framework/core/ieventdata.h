@@ -62,6 +62,6 @@ public:
 	virtual float GetTimeStamp() const = 0;
 };
 
-typedef boost::shared_ptr<IEventData> EventPtr;
+typedef boost::shared_ptr<IEventData> IEventDataPtr;
 
 #endif

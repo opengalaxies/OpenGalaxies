@@ -48,9 +48,9 @@ public:
 	void AbortEvent( const EventType inType, bool allOfType = false );
 	void AddListener( const EventHandler fnHandler, const EventType eventType );
 	void DeleteListener( const EventHandler fnHandler, const EventType eventType );
-	void QueueEvent( const EventPtr& inEvent );
+	void QueueEvent( const IEventDataPtr& inEvent );
 	void Tick( void );
-	void Trigger( const EventPtr& inEvent ) const;
+	void Trigger( const IEventDataPtr& inEvent ) const;
 	bool TypeLegal( const EventType inType ) const;
 	bool ValidateType( const EventType inType ) const;
 
@@ -65,7 +65,7 @@ private:
 	typedef std::list< EventHandler >							EventHandlerTable;
 	typedef std::map< unsigned long, EventHandlerTable >		EventHandlerMap;
 	typedef std::pair< unsigned long, EventHandlerTable >		EventHandlerMapEnt;
-	typedef std::list< EventPtr >								EventQueue;
+	typedef std::list< IEventDataPtr >								EventQueue;
 
 	//
 	// We need to double buffer the queuing of events,

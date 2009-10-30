@@ -32,6 +32,7 @@ class TestEventManager : public CppUnit::TestFixture
 	CPPUNIT_TEST_SUITE( TestEventManager );
 	CPPUNIT_TEST( testQueue );
 	CPPUNIT_TEST( testTrigger );
+	CPPUNIT_TEST( testAbortEvent );
 	CPPUNIT_TEST_SUITE_END( TestEventManager );
 public:
 	TestEventManager( void ) : mEventManager( "TestEventManager" ) { }
@@ -42,9 +43,10 @@ public:
 
 	void testQueue( void );
 	void testTrigger( void );
+	void testAbortEvent( void );
 protected:
 private:
-	void HandleEvent( const EventPtr& pEvent );
+	void HandleEvent( const IEventDataPtr& pEvent );
 
 	EventManager mEventManager;
 };

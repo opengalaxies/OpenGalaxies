@@ -36,7 +36,7 @@
 
 // TYPEDEF
 //
-typedef boost::function< void ( const EventPtr& ) > EventHandler;
+typedef boost::function< void ( const IEventDataPtr& ) > EventHandler;
 
 /**
  * @class IEventManager
@@ -81,7 +81,7 @@ public:
 	 * to trigger an event sychronously, see Trigger().
 	 * @param IEventData[in] - The event and its data.
 	 */
-	virtual void QueueEvent( const EventPtr& inEvent ) = 0;
+	virtual void QueueEvent( const IEventDataPtr& inEvent ) = 0;
 
 	/**
 	 * Triggers all events in-queue. Optionally, you can limit the amount of CPU time (in milliseconds)
@@ -95,7 +95,7 @@ public:
 	 * the next Tick().
 	 * @param IEventData[in] - The event and its data.
 	 */
-	virtual void Trigger( const EventPtr& inEvent ) const = 0;
+	virtual void Trigger( const IEventDataPtr& inEvent ) const = 0;
 
 	/**
 	 * Validates that an EventType is being listened for. This <b>will not</b> add

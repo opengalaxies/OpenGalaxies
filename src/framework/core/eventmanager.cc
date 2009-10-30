@@ -41,6 +41,19 @@ EventManager::~EventManager( void )
 void
 EventManager::AbortEvent( const EventType inType, bool allOfType )
 {
+	if( !TypeLegal( inType ) || !ValidateType( inType ) )
+		return;
+
+	EventHandlerMap::iterator iter = mEventHandlers.find( inType.GetHashValue() );
+	if( iter != mEventHandlers.end() )
+	{
+		// If allOfType is true, clear the list.
+		if(allOfType)
+			iter->second.clear();
+		// Otherwise, pop the last pushed event.
+		else
+			iter->second.pop_back();
+	}
 }
 
 void
@@ -79,7 +92,7 @@ EventManager::DeleteListener( const EventHandler fnHandler, const EventType even
 }
 
 void
-EventManager::QueueEvent( const EventPtr& inEvent )
+EventManager::QueueEvent( const IEventDataPtr& inEvent )
 {
 	if( !TypeLegal( inEvent->GetEventType() ) || !ValidateType( inEvent->GetEventType() ) )
 		return;
@@ -94,7 +107,7 @@ EventManager::Tick( void )
 	mActiveQueue = (mActiveQueue + 1) % 2; // Saves us from a couple of if/else statements.
 	mEventQueues[mActiveQueue].clear(); // Clear our second buffer to allow for new events.
 
-	BOOST_FOREACH( EventPtr pEvent, mEventQueue )
+	BOOST_FOREACH( IEventDataPtr pEvent, mEventQueue )
 	{
 		if( !pEvent->Validate() )
 			break;
@@ -128,7 +141,7 @@ EventManager::Tick( void )
 }
 
 void
-EventManager::Trigger( const EventPtr& inEvent ) const
+EventManager::Trigger( const IEventDataPtr& inEvent ) const
 {
 	if( !TypeLegal( inEvent->GetEventType() ) || !ValidateType( inEvent->GetEventType() ) )
 		return;

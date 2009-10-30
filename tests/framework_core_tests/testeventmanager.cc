@@ -47,7 +47,15 @@ TestEventManager::testTrigger( void )
 }
 
 void
-TestEventManager::HandleEvent( const EventPtr &pEvent )
+TestEventManager::testAbortEvent( void )
 {
-	std::cout << "Event [" << pEvent->GetEventType().GetString() << "] was triggered.";
+	mEventManager.QueueEvent( boost::shared_ptr<IEventData>( new TestEvent() ) );
+	mEventManager.AbortEvent( EventType("ClientPermissionsMessage") );
+	mEventManager.Tick();
+}
+
+void
+TestEventManager::HandleEvent( const IEventDataPtr &pEvent )
+{
+	std::cout << "Event [" << pEvent->GetEventType().GetString() << "] was triggered.\n";
 }
