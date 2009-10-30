@@ -121,7 +121,7 @@ EventManager::Tick( void )
 			const EventHandlerTable& table = wcIter->second;
 			BOOST_FOREACH( EventHandler handler, table )
 			{
-				handler( pEvent );
+				handler( *pEvent );
 			}
 		}
 
@@ -134,16 +134,16 @@ EventManager::Tick( void )
 			const EventHandlerTable& table = iter->second;
 			BOOST_FOREACH( EventHandler handler, table )
 			{
-				handler( pEvent );
+				handler( *pEvent );
 			}
 		}
 	}
 }
 
 void
-EventManager::Trigger( const IEventDataPtr& inEvent ) const
+EventManager::Trigger( const IEventData& inEvent ) const
 {
-	if( !TypeLegal( inEvent->GetEventType() ) || !ValidateType( inEvent->GetEventType() ) )
+	if( !TypeLegal( inEvent.GetEventType() ) || !ValidateType( inEvent.GetEventType() ) )
 		return;
 
 	//
@@ -162,7 +162,7 @@ EventManager::Trigger( const IEventDataPtr& inEvent ) const
 	//
 	// Process Normal Listeners.
 	//
-	EventHandlerMap::const_iterator iter = mEventHandlers.find( inEvent->GetEventType().GetHashValue() );
+	EventHandlerMap::const_iterator iter = mEventHandlers.find( inEvent.GetEventType().GetHashValue() );
 	if( iter != mEventHandlers.end() )
 	{
 		const EventHandlerTable& table = iter->second;

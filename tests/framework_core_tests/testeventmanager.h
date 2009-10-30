@@ -46,7 +46,7 @@ public:
 	void testAbortEvent( void );
 protected:
 private:
-	void HandleEvent( const IEventDataPtr& pEvent );
+	void HandleEvent( const IEventData& pEvent );
 
 	EventManager mEventManager;
 };

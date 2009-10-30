@@ -36,7 +36,7 @@
 
 // TYPEDEF
 //
-typedef boost::function< void ( const IEventDataPtr& ) > EventHandler;
+typedef boost::function< void ( const IEventData& ) > EventHandler;
 
 /**
  * @class IEventManager
@@ -79,7 +79,7 @@ public:
 	/**
 	 * Adds an event to the Event Queue, that will be triggered on the next Tick(). If you wish
 	 * to trigger an event sychronously, see Trigger().
-	 * @param IEventData[in] - The event and its data.
+	 * @param IEventDataPtr[in] - The event and its data.
 	 */
 	virtual void QueueEvent( const IEventDataPtr& inEvent ) = 0;
 
@@ -95,7 +95,7 @@ public:
 	 * the next Tick().
 	 * @param IEventData[in] - The event and its data.
 	 */
-	virtual void Trigger( const IEventDataPtr& inEvent ) const = 0;
+	virtual void Trigger( const IEventData& inEvent ) const = 0;
 
 	/**
 	 * Validates that an EventType is being listened for. This <b>will not</b> add

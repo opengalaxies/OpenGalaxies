@@ -50,7 +50,7 @@ public:
 	void DeleteListener( const EventHandler fnHandler, const EventType eventType );
 	void QueueEvent( const IEventDataPtr& inEvent );
 	void Tick( void );
-	void Trigger( const IEventDataPtr& inEvent ) const;
+	void Trigger( const IEventData& inEvent ) const;
 	bool TypeLegal( const EventType inType ) const;
 	bool ValidateType( const EventType inType ) const;
 

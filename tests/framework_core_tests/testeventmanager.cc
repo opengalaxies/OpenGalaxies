@@ -43,7 +43,7 @@ TestEventManager::testQueue( void )
 void
 TestEventManager::testTrigger( void )
 {
-	mEventManager.Trigger( boost::shared_ptr<IEventData>( new TestEvent() ) );
+	mEventManager.Trigger( TestEvent() );
 }
 
 void
@@ -55,7 +55,7 @@ TestEventManager::testAbortEvent( void )
 }
 
 void
-TestEventManager::HandleEvent( const IEventDataPtr &pEvent )
+TestEventManager::HandleEvent( const IEventData& pEvent )
 {
-	std::cout << "Event [" << pEvent->GetEventType().GetString() << "] was triggered.\n";
+	std::cout << "Event [" << pEvent.GetEventType().GetString() << "] was triggered.\n";
 }
