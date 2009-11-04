@@ -16,8 +16,8 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef TESTEVENTMANAGER_H
-#define TESTEVENTMANAGER_H
+#ifndef TESTBYTEBUFFER_H
+#define TESTBYTEBUFFER_H
 
 // CPPUNIT INCLUDES
 //
@@ -25,33 +25,29 @@
 
 // PROJECT INCLUDES
 //
-#include <framework/core/eventmanager.h>
+#include <framework/util/bytebuffer.h>
 
-class TestEventManager : public CppUnit::TestFixture
+class TestByteBuffer : public CppUnit::TestFixture
 {
-	CPPUNIT_TEST_SUITE( TestEventManager );
-	CPPUNIT_TEST( testQueue );
-	CPPUNIT_TEST( testTrigger );
-	CPPUNIT_TEST( testAbortEvent );
-	CPPUNIT_TEST( testEventSerialization );
-	CPPUNIT_TEST_SUITE_END( TestEventManager );
+	CPPUNIT_TEST_SUITE( TestByteBuffer );
+	CPPUNIT_TEST( testBasicTypes );
+	CPPUNIT_TEST( testClear );
+	CPPUNIT_TEST_SUITE_END();
+
 public:
-	TestEventManager( void ) : mEventManager( "TestEventManager" ) { }
-	~TestEventManager( void ) { }
+	TestByteBuffer( void );
+	~TestByteBuffer( void );
 
 	void setUp( void );
 	void tearDown( void );
 
-	void testQueue( void );
-	void testTrigger( void );
-	void testAbortEvent( void );
-	void testEventSerialization( void );
+	void testBasicTypes( void );
+	void testClear( void );
+
 protected:
 private:
-	void HandleEvent( const IEventData& event );
-
-	EventManager mEventManager;
-	ByteBuffer buffer;
+	ByteBuffer			mBuffer;
 };
+
 
 #endif

@@ -16,34 +16,4 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "testprocessmanager.h"
-#include "testprocess.h"
-
-CPPUNIT_TEST_SUITE_REGISTRATION( TestProcessManager );
-
-void
-TestProcessManager::setUp( void )
-{
-	mRootProcess = boost::shared_ptr< Process >( new TestProcess("RootProcess") );
-	mRootProcess->SetNext( boost::shared_ptr< Process >( new TestProcess("ChildProcess") ) );
-	mProcessManager.Attach( mRootProcess );
-}
-
-void
-TestProcessManager::tearDown( void )
-{
-}
-
-void
-TestProcessManager::testUpdate( void )
-{
-	// Simulate a clock.
-	for(int x = 0; x < 10; x++)
-		mProcessManager.Update( x );
-}
-
-void
-TestProcessManager::testTogglePause( void )
-{
-	mRootProcess->TogglePause();
-}
+#include "../../../src/framework/util/bytebuffer.h"

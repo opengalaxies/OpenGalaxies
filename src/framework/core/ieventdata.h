@@ -26,6 +26,7 @@
 // PROJECT INCLUDE
 //
 #include <framework/util/hashedstring.h>
+#include <framework/util/iserializable.h>
 #include <framework/util/ogdef.h>
 #include <framework/util/ogtypes.h>
 
@@ -44,7 +45,7 @@ typedef HashedString EventType;
  *
  * @note This class is based off of the IEventData class form "Game Coding Complete: Third Edition" by Mike McShaffry.
  */
-class OG_API IEventData
+class OG_API IEventData : public ISerializable
 {
 public:
 	IEventData() { }
@@ -53,8 +54,9 @@ public:
 	
 	// OPERATIONS
 	//
-	virtual void Serialize( std::ostream &out ) const = 0;
 	virtual bool Validate( void ) { return true; }
+	virtual void Serialize( ByteBuffer& archv ) const { }
+	virtual void Deserialize( ByteBuffer& archv ) const { }
 
 	// ACCESS
 	//

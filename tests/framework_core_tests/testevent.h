@@ -27,7 +27,7 @@ class TestEvent : public BaseEventData
 {
 public:
 	TestEvent( void )
-		: mEventType("ClientPermissionsMessage")
+		: mEventType("ClientPermissionsMessage"), AllowZone( 0 ), AllowCharacterCreation( 0 ), AllowUnlimitedCharacterCreation( 0 )
 	{
 	}
 
@@ -48,6 +48,20 @@ public:
 	uint8 AllowCharacterCreation;
 	uint8 AllowZone;
 	uint8 AllowUnlimitedCharacterCreation;
+
+	void Serialize( ByteBuffer& archv ) const
+	{
+		archv << AllowZone;
+		archv << AllowCharacterCreation;
+		archv << AllowUnlimitedCharacterCreation;
+	}
+
+	void Deserialize( ByteBuffer& archv ) const
+	{
+		archv >> AllowZone;
+		archv >> AllowCharacterCreation;
+		archv >> AllowUnlimitedCharacterCreation;
+	}
 
 protected:
 private:

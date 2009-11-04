@@ -55,7 +55,25 @@ TestEventManager::testAbortEvent( void )
 }
 
 void
-TestEventManager::HandleEvent( const IEventData& pEvent )
+TestEventManager::testEventSerialization( void )
 {
-	std::cout << "Event [" << pEvent.GetEventType().GetString() << "] was triggered.\n";
+	ByteBuffer archv;
+
+	TestEvent event(1, 1, 0);
+	event.Serialize( archv );
+
+	TestEvent event_in(0, 0, 0);
+	event_in.Deserialize( archv );
+
+	mEventManager.Trigger( event_in );
+}
+
+void
+TestEventManager::HandleEvent( const IEventData& event )
+{
+	const TestEvent& _event = static_cast< const TestEvent& >( event );
+
+	if(_event.GetEventType().GetHashValue() != EventType("ClientPermissionsMessage").GetHashValue())
+		assert( 0 && "Event Type was incorrect." );
+	
 }

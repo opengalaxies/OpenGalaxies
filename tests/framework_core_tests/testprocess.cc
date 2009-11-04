@@ -23,14 +23,12 @@ void
 TestProcess::Initialize( void )
 {
 	Process::Initialize();
-	std::cout << mName.c_str() << ":Initialize" << std::endl;
 }
 
 void
 TestProcess::Kill( void )
 {
 	Process::Kill();
-	std::cout << mName.c_str() << ":Kill" << std::endl;
 }
 
 void
@@ -40,8 +38,6 @@ TestProcess::Update( const uint32 deltaMilliseconds )
 
 	if( deltaMilliseconds == 2 )
 		Kill();
-
-	std::cout << mName.c_str() << ":Update" << std::endl;
 }
 
 void
