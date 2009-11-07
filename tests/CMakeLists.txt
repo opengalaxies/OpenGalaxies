@@ -16,6 +16,4 @@
 
 INCLUDE( MacroAddCppUnitTest )
 
-SET( FRAMEWORK_CORE_LIBS ogcore ogutil )
-
-ADD_CPPUNIT_TEST( framework_core_tests ${FRAMEWORK_CORE_LIBS} )
+ADD_CPPUNIT_TEST( framework_tests ogframework )
