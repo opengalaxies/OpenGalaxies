@@ -30,6 +30,22 @@
 #include <assert.h>
 #include <vector>
 
+// EXCEPTIONS
+//
+class ByteBufferOverflowException : public std::exception
+{
+public:
+	ByteBufferOverflowException() { }
+	virtual ~ByteBufferOverflowException() { }
+};
+
+class ByteBufferOverrunException : public std::exception
+{
+public:
+	ByteBufferOverrunException() { }
+	virtual ~ByteBufferOverrunException() { }
+};
+
 /**
  * @class ByteBuffer
  * @brief
@@ -52,7 +68,7 @@ public:
 	template< typename T > inline ByteBuffer& operator << ( T& value )
 	{
 		if( mWriteIndex + sizeof(T) > mStorage.capacity() )
-			assert( 0 && "Trying to write more then the ByteBuffer will hold!" );
+			throw ByteBufferOverflowException();
 
 		EndianConvert( value );
 
@@ -66,7 +82,7 @@ public:
 	template< typename T > inline ByteBuffer& operator >> ( T& value )
 	{
 		if( mReadIndex + sizeof(T) > mStorage.size() )
-			assert( 0 && "Trying to read more then the ByteBuffer has!" );
+			throw ByteBufferOverrunException();
 
 		memcpy( (void*) &value, &mStorage[mReadIndex], sizeof(T) );
 		EndianConvert( value );
