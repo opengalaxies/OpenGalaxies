@@ -78,6 +78,7 @@ public:
 	//
 	uint32 Size() const { return mStorage.size(); }
 	uint32 Capacity() const { return mStorage.capacity(); }
+	const std::vector<uint8>& Contents() const { return mStorage; }
 
 	// INQUIRES
 	//

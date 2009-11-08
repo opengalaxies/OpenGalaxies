@@ -19,6 +19,10 @@
 #ifndef SINGLETON_H
 #define SINGLETON_H
 
+// PROJECT INCLUDES
+//
+#include <framework/policies/checking.h>
+
 // ECT INCLUDES
 //
 #include <assert.h>
@@ -27,17 +31,45 @@
  * @class Singleton
  * @brief A template class used to create single-instance global classes.
  */
-template< class T >
+template< 
+	class T,
+	class CheckingPolicy = EnforceNotNull<T>
+>
 class Singleton
 {
 public:
-	Singleton() { if(!mSingleInstance) msSingleInstance = static_cast< T* >( this ); }
+	Singleton() { if(!msSingleInstance) msSingleInstance = static_cast< T* >( this ); }
 	virtual ~Singleton() { msSingleInstance = 0; }
 
-	// OPERATIONS
+	// ACCESS
 	//
-	T& GetRef( void ) { assert( msSingleInstance ); return *msSingleInstance; }
-	T* GetPtr( void ) { return msSingleInstance; }
+	static T& Instance( void )
+	{
+		try
+		{
+			CheckingPolicy::Check( msSingleInstance );
+		}
+		catch( EnforceNotNull<T>::NullPointerException& e )
+		{
+			assert( 0 && "Singleton: is null!" );
+		}
+
+		return *msSingleInstance; 
+	}
+
+	static T* InstancePtr( void )
+	{
+		try
+		{
+			CheckingPolicy::Check( msSingleInstance );
+		}
+		catch( EnforceNotNull<T>::NullPointerException& e )
+		{
+			assert( 0 && "Singleton: is null!" );
+		}
+
+		return msSingleInstance; 
+	}
 
 protected:
 private:
