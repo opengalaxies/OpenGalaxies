@@ -22,8 +22,7 @@
 // PROJECT INCLUDES
 //
 #include <framework/core/ieventmanager.h>
-#include <framework/util/ogdef.h>
-#include <framework/util/ogtypes.h>
+#include <framework/util/singleton.h>
 
 // STL INCLUDES
 //
@@ -35,12 +34,15 @@
  * @class EventManager
  * @brief A basic concrete IEventManager.
  *
+ * This class is <b>not</b> thread-safe. All events queued are garunteed to be executed
+ * in the thread Tick() is invoked. For Async Event Managment, @see AsyncEventManager.
+ *
  * @note This class is based off of the EventManager class form "Game Coding Complete: Third Edition" by Mike McShaffry.
  */
-class OG_API EventManager : public IEventManager
+class OG_API EventManager : public IEventManager, public Singleton< EventManager >
 {
 public:
-	EventManager( std::string name, bool setGlobal = false );
+	EventManager( std::string name );
 	virtual ~EventManager( void );
 
 	// OPERATIONS
@@ -56,7 +58,6 @@ public:
 
 	// ACCESS
 	//
-	static EventManager* Get() { return gEventManager; }
 	std::string GetName( void ) const { return mName; }
 
 protected:
@@ -65,7 +66,7 @@ private:
 	typedef std::list< EventHandler >							EventHandlerTable;
 	typedef std::map< unsigned long, EventHandlerTable >		EventHandlerMap;
 	typedef std::pair< unsigned long, EventHandlerTable >		EventHandlerMapEnt;
-	typedef std::list< IEventDataPtr >								EventQueue;
+	typedef std::list< IEventDataPtr >							EventQueue;
 
 	//
 	// We need to double buffer the queuing of events,
@@ -77,8 +78,6 @@ private:
 	EventHandlerMap			mEventHandlers;
 
 	std::string mName;
-
-	static EventManager* gEventManager;
 };
 
 #endif

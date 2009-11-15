@@ -48,7 +48,10 @@ public:
 
 /**
  * @class ByteBuffer
- * @brief
+ * @brief An archive for a sequence of bytes.
+ * 
+ * A ByteBuffer can be used to store/serialize a sequence of bytes, which can be read back
+ * later (in the same order).
  */
 class ByteBuffer
 {
@@ -65,6 +68,12 @@ public:
 
 	// OPERATORS
 	//
+
+	/**
+	 * @brief Writes the value to the buffer.
+	 * This operator will take the value passed to it and write it in byte form to the archive.
+	 * If the user tries to write more than the buffer can contain, it will throw a ByteBufferOverflowException.
+	 */
 	template< typename T > inline ByteBuffer& operator << ( T& value )
 	{
 		if( mWriteIndex + sizeof(T) > mStorage.capacity() )
@@ -79,6 +88,11 @@ public:
 		return *this;
 	}
 
+	/**
+	 * @brief Read a value from the buffer.
+	 * This operator will read a sequence of bytes from the buffer corresponding to
+	 * the size of T. In which it will copy the result into the passed reference of T.
+	 */
 	template< typename T > inline ByteBuffer& operator >> ( T& value )
 	{
 		if( mReadIndex + sizeof(T) > mStorage.size() )

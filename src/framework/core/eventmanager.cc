@@ -24,13 +24,11 @@
 //
 #include "eventmanager.h"
 
-EventManager* EventManager::gEventManager = NULL;
+EventManager* Singleton<EventManager>::msSingleInstance = NULL;
 
-EventManager::EventManager( std::string name, bool setGlobal )
+EventManager::EventManager( std::string name )
 : IEventManager( name ), mActiveQueue( 0 ), mName( name )
 {
-	if( setGlobal )
-		gEventManager = this;
 }
 
 EventManager::~EventManager( void )
