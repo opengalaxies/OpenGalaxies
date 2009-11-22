@@ -16,4 +16,4 @@
 
 INCLUDE( MacroAddCppUnitTest )
 
-ADD_CPPUNIT_TEST( framework_tests ogframework )
+ADD_CPPUNIT_TEST( framework_tests framework )

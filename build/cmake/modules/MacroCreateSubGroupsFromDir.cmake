@@ -14,9 +14,6 @@
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, see <http://www.gnu.org/licenses/>.
 
-# This file is responsible for checking the endianness of the
-# machine and correctly configure the project to build appropriatly.
-
 MACRO( CREATE_SUBGROUPS_FROM_DIR )
 	FILE( GLOB SUB_DIRS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} * )
 	foreach( DIR ${SUB_DIRS} )

@@ -16,8 +16,5 @@
 
 CMAKE_MINIMUM_REQUIRED( VERSION 2.6 )
 
-# Export libraries
-ADD_DEFINITIONS( -DOG_EXPORT )
-
 ADD_SUBDIRECTORY( framework )
 
