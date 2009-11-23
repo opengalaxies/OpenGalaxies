@@ -19,6 +19,10 @@
 #ifndef BYTEBUFFER_H
 #define BYTEBUFFER_H
 
+// BOOST INCLUDES
+//
+#include <boost/shared_ptr.hpp>
+
 // PROJECT INCLUDES
 //
 #include <framework/util/endian.h>
@@ -65,6 +69,19 @@ public:
 	// OPERATIONS
 	//
 	void Clear() { mStorage.clear(); mReadIndex = mWriteIndex = 0; }
+
+	/**
+	 * @brief Writes an array of bytes to the buffer.
+	 */
+	void MemCpy( char* buffer, uint16 len )
+	{
+		if( mWriteIndex + len > mStorage.capacity() )
+			throw ByteBufferOverflowException();
+
+		mStorage.resize( mWriteIndex + len );
+		memcpy( &mStorage[mWriteIndex], buffer, len );
+		mWriteIndex += len;
+	}
 
 	// OPERATORS
 	//
@@ -121,5 +138,7 @@ private:
 	std::vector<uint8>			mStorage;
 
 };
+
+typedef boost::shared_ptr< ByteBuffer >	pByteBuffer;
 
 #endif

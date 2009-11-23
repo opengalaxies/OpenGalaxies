@@ -16,6 +16,9 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#ifndef GLOBALCONSOLE_H
+#define GLOBALCONSOLE_H
+
 // PROJECT INCLUDES
 //
 #include <framework/util/bytebuffer.h>
@@ -30,3 +33,7 @@ public:
 	GlobalConsole();
 	virtual ~GlobalConsole();
 };
+
+#define sConsole GlobalConsole::Instance()
+
+#endif
