@@ -69,10 +69,11 @@ CONFIGURE_FILE( ${CMAKE_SOURCE_DIR}/config.h.in ${CMAKE_BINARY_DIR}/include/conf
 #
 # ${CMAKE_CURRENT_BINARY_DIR}/include - This is where config.h resides, so each
 # build can have different configurations
-INCLUDE_DIRECTORIES( include ${CMAKE_BINARY_DIR}/include ${Boost_INCLUDE_DIRS} external/include )
+INCLUDE_DIRECTORIES( src ${CMAKE_BINARY_DIR}/include ${Boost_INCLUDE_DIRS} external/include )
 
 # Library Directories
 #
+LINK_DIRECTORIES( ${LINK_DIRECTORIES} ${Boost_LIBRARY_DIRS} )
 IF( WIN32 )
 	IF( CMAKE_BUILD_TYPE STREQUAL "Debug" )
 		LINK_DIRECTORIES( ${LINK_DIRECTORIES} "${CMAKE_SOURCE_DIR}/external/lib/win32/debug" )

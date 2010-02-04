@@ -24,6 +24,7 @@
 //
 #include <iostream>
 
+template<>
 GlobalConsole* Singleton< GlobalConsole >::msSingleInstance = new GlobalConsole();
 
 GlobalConsole::GlobalConsole()

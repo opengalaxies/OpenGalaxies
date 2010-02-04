@@ -31,9 +31,9 @@
  * @class Singleton
  * @brief A template class used to create single-instance global classes.
  */
-template< 
+template<
 	class T,
-	class CheckingPolicy = EnforceNotNull<T>
+    class CheckingPolicy = EnforceNotNull< T >
 >
 class Singleton
 {
@@ -45,30 +45,30 @@ public:
 	//
 	static T& Instance( void )
 	{
-		try
-		{
-			CheckingPolicy::Check( msSingleInstance );
-		}
-		catch( EnforceNotNull<T>::NullPointerException& e )
-		{
-			assert( 0 && "Singleton: is null!" );
-		}
+        try
+        {
+            CheckingPolicy::Check( msSingleInstance );
+        }
+        catch( typename EnforceNotNull<T>::NullPointerException& e )
+        {
+            assert( 0 && "Singleton: is null!" );
+        }
 
-		return *msSingleInstance; 
+		return *msSingleInstance;
 	}
 
 	static T* InstancePtr( void )
 	{
-		try
-		{
-			CheckingPolicy::Check( msSingleInstance );
-		}
-		catch( EnforceNotNull<T>::NullPointerException& e )
-		{
-			assert( 0 && "Singleton: is null!" );
-		}
+        try
+        {
+            CheckingPolicy::Check( msSingleInstance );
+        }
+        catch( typename EnforceNotNull<T>::NullPointerException& e )
+        {
+            assert( 0 && "Singleton: is null!" );
+        }
 
-		return msSingleInstance; 
+		return msSingleInstance;
 	}
 
 protected:

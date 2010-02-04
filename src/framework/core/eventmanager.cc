@@ -24,6 +24,7 @@
 //
 #include "eventmanager.h"
 
+template<>
 EventManager* Singleton<EventManager>::msSingleInstance = NULL;
 
 EventManager::EventManager( std::string name )
@@ -71,7 +72,7 @@ EventManager::AddListener( const EventHandler fnHandler,  const EventType eventT
 	iter->second.push_back( fnHandler );
 }
 
-void 
+void
 EventManager::DeleteListener( const EventHandler fnHandler, const EventType eventType )
 {
 	if( !TypeLegal( eventType ) || !ValidateType( eventType ) )
@@ -190,6 +191,6 @@ EventManager::ValidateType( const EventType inType ) const
 	{
 		return false;
 	}
-	
+
 	return true;
 }

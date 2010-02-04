@@ -32,6 +32,7 @@
 // STL INCLUDES
 //
 #include <assert.h>
+#include <string.h>
 #include <vector>
 
 // EXCEPTIONS
@@ -40,20 +41,20 @@ class ByteBufferOverflowException : public std::exception
 {
 public:
 	ByteBufferOverflowException() { }
-	virtual ~ByteBufferOverflowException() { }
+	virtual ~ByteBufferOverflowException() throw() { }
 };
 
 class ByteBufferOverrunException : public std::exception
 {
 public:
 	ByteBufferOverrunException() { }
-	virtual ~ByteBufferOverrunException() { }
+	virtual ~ByteBufferOverrunException() throw() { }
 };
 
 /**
  * @class ByteBuffer
  * @brief An archive for a sequence of bytes.
- * 
+ *
  * A ByteBuffer can be used to store/serialize a sequence of bytes, which can be read back
  * later (in the same order).
  */
