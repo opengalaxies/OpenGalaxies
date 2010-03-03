@@ -1,0 +1,147 @@
+<html>
+<head>
+<title>OpenGalaxies - Software Requirements Specification</title>
+<img src="http://www.opengalaxies.org/images/og_logo.png"/></br>
+<big><b>Software Requirements Specification</b></big></br>
+</head>
+<pre>
+
+<big><u><b>Table of Contents</b></u></big>
+
+1.0 Introduction
+	1.1 Purpose
+	1.2 Scope
+	1.3 Definitions, Acronyms, and Abbreviations
+	1.4 References
+	1.5 Overview
+2.0 Overall Description
+	2.1 Production Perspective
+	2.2 Product Functions
+	2.3 User Characteristics
+	2.4 Constraints
+	2.5 Assumptions and Dependencies
+3.0 Specific Requirements
+	3.1 External Interface Requirements
+		3.1.1 User Interface
+		3.1.2 Hardware Interfaces
+		3.1.3 Software Interfaces
+		3.1.4 Communications Interfaces
+	3.2 Functional Requirements
+	3.3 Performance Requirements
+		3.3.1 Standards
+		3.3.2 Hardware Limitations
+	3.4 Design Constraints
+		3.4.1 Availability
+		3.4.2 Security
+		3.4.3 Maintainability
+	3.5 Other Requirements
+4.0 Appendixes
+5.0 Index
+
+
+<big><u><b>Introduction</b></u></big>
+
+	<big><u>1.1 Purpose</u></big>
+		OpenGalaxies was created with the intent of creating a software suite used to emulate the most under-appreciated MMORPG of the decade: Star Wars Galaxies.
+
+	<big><u>1.2 Scope</u></big>
+		Although the lower-level software components of this project can be used to create different versions of the game, with little to no modification, 
+		the scope of this project is to develop a PreCU ( Publish 14 ) implementation of the game.
+		
+	<big><u>1.3 Definitions, Acronyms, and Abbreviations</u></big>
+		<b>SWG</b> - Star Wars Galaxies
+		
+	<big><u>1.4 References</u></big>
+	
+	
+	<big><u>1.5 Overview</u></big>
+	
+	
+<big><u><b>Overall Description</b></u></big>
+
+	<big><u>2.1 Product Perspective</u></big>
+		This product is based off of the game Star Wars Galaxies, all documentation known thus far can be found at <a href="http://wiki.opengalaxies.org">our wiki</a> as well
+		as other locations around the internet.
+	
+	<big><u>2.2 Product Functions</u></big>
+		
+	
+	<big><u>2.3 User Characteristics</u></big>
+		The software is designed for people who wish to host their own Star Wars Galaxies private server. The software is intended to be used
+		by experienced Server Administrators. As well, this project was created as an educational experience; programmers wanting to learn 
+		the techniques used in creating large-scale multi- threaded/proecess applications also apply as a user.
+	
+	<big><u>2.4 Constraints</u></big>
+		One of the biggest contraints the software faces is bandwidth, so it is very important that messages be packed and compressed as tightly as possible. Another
+		contraint is the amount of available RAM, therefore, it is critical that we manage memory correctly and be as lightweight as possible with the storage of runtime elements.
+	
+	<big><u>2.5 Assumptions and Dependencies</u></big>
+		Our software depends on the following software libraries/packages:
+			<b>Boost</b> - A multitude of Boost libraries are used for this project, such as ASIO, UUID, Config, and more. These libraries are generic, multiplatform solutions.
+			<b>Qt</b> - These libraries will be used for tool development. They are a multiplatform GUI solution.
+			<b>CMake</b> - This software package is used to generate build and IDE files.
+			<b>CPPUnit</b> - These libraries are used for testing. They are a testing framework.
+	
+<big><u><b>Specific Requirements</b></u></big>
+	
+	<big><u>3.1 External Interface Requirements</u></big>
+	
+		<big><u>3.1.1 User Interface</u></big>
+			
+		
+		<big><u>3.1.2 Hardware Interface Requirements</u></big>
+			No Minimum Hardware Specifications are available at this time.
+		
+		<big><u>3.1.3 Software Interface Requirements</u></big>
+
+		
+		<big><u>3.1.4 Communications Interface</u></big>
+		
+		
+	<big><u>3.2 Functional Requirements</u></big>
+		<big><b>3.2.1 Server Framework (Generic)</b></big>
+			<Req_1> The software shall provide interfaces, in which server programmers can create plugins to extend server functionality.
+			<Req_2> The software framework shall run independent of game implementation, allowing game implementations to be "pluged in" as services, through provided interfaces.
+			<Req_3> All software components shall communicate through a centeralized event system.
+			<Req_4> The software shall provide secure clustering/load-balancing support.
+			<Req_5> The software shall instantiate and handle network connections at a low-level.
+			<Req_6> The software shall instantiate and handle database connections.
+			<Req_7> The software shall provide spatial management utilities.
+			<Req_8> The software shall provide game simulation utilities.
+			<Req_9> Network Object Attributes will automatically be updated over the network at a specific "tick" interval.
+			<Req_10> The software shall be operated on a "tick"-system, which will allow the software components to keep in-sync.
+			<Req_11> The software shall logging capabilities that will track errors and log debug statements.
+			
+		<big><b>3.2.2 An Empire Divided ( Publish 14 Modules )</b></big>
+			
+		<big><b>3.2.3 Jump to Lightspeed ( Publish 14 Modules )</b></big>
+
+		<big><b>3.2.4 Portal/Adminitration Tools</b></big>
+			
+		<big><b>3.2.5 SWGSDK</b></big>
+	
+	<big><u>3.3 Performance Requirements</u></big>
+	
+	<big><u>3.4 Design Constraints</u></big>
+	
+		<big><u>3.4.1 Availability</u></big>
+			OpenGalaxies is an Open Source product. Anyone can pick up the source code and compile it. 
+			Every so interval, a release version of the software suite will be released.
+		
+		<big><u>3.4.2 Security</u></big>
+		
+		<big><u>3.4.3 Maintainability</u></big>
+			Modification of the servers functionality can be accomplished through plugins, modules, and additional services. Content Developers can construct game content
+			through scripting and provided tools.
+		
+	<big><u>3.5 Other Requirements</u></big>
+	
+	
+<big><u><b>Appendixes</b></u></big>
+
+
+<big><u><b>Index</b></u></big>
+
+
+</pre>
+</html>
